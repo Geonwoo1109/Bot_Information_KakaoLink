@@ -1,0 +1,72 @@
+/*-made by MAKEJOY-*/
+if(msg == "/봇상태"||msg == "/봇정보")
+{
+var device = android.provider.Settings.Global.getString(Api.getContext().getContentResolver(), "device_name");
+let battery = Device.getBatteryLevel() + "%";
+let batt_temp = Device.getBatteryTemperature() / 10 + "°C";
+let batt_volt = Device.getBatteryVoltage() + "mV";
+let ischarge = Device.isCharging() ? '충전중' : '충전중이아님';
+let memory = getMemoryInfo()
+let ping = getPing()
+var a = Device.getBatteryLevel();
+var b = Device.isCharging();
+if(a<15){
+batteryImg = "http://makejoy.co.kr/mjbot/info/bt15.png"
+}
+if(15<a<30){
+batteryImg = "http://makejoy.co.kr/mjbot/info/bt30.png"
+}
+if(30<a<60){
+batteryImg = "http://makejoy.co.kr/mjbot/info/bt60.png"
+}
+if(60<a<85){
+batteryImg = "http://makejoy.co.kr/mjbot/info/bt85.png"
+}
+if(85<a){
+batteryImg = "http://makejoy.co.kr/mjbot/info/bt100.png"
+}
+if(b===(true)){
+chargeImg = "http://makejoy.co.kr/mjbot/info/charge1.png"
+}
+if(b===(false)){
+chargeImg = "http://makejoy.co.kr/mjbot/info/charge0.png"
+}
+
+Kakao.send(room, {
+"link_ver": "4.0",
+"template_id": (00000),
+"template_args": {
+device: device,
+battery: battery,                        
+batt_temp: batt_temp,
+ischarge: ischarge,
+batteryImg: batteryImg,                        
+chargeImg: chargeImg,
+memory: memory,
+ping: ping
+}}, "custom");
+}
+
+function getPing() {
+var t = java.lang.System.currentTimeMillis();
+var bool = java.net.InetAddress.getByName("172.217.161.131").isReachable(1000);
+return (java.lang.System.currentTimeMillis() - t) + "ms";
+}
+
+function byteCalculation(bytes) {
+var bytes = parseInt(bytes);
+var s = ['bytes', 'KB', 'MB', 'GB', 'TB', 'PB','EB'];
+var e = Math.floor(Math.log(bytes)/Math.log(1024));
+if(e == "-Infinity") return "0 "+s[0];
+else
+return (bytes/Math.pow(1024, Math.floor(e))).toFixed(2)+""+s[e];
+}
+
+function getMemoryInfo() {
+var am = Api.getContext().getSystemService(Api.getContext().ACTIVITY_SERVICE);
+var mem = new android.app.ActivityManager.MemoryInfo();
+am.getMemoryInfo(mem);
+var useMem = Math.floor(mem.totalMem - mem.availMem);
+var percent = Math.floor((useMem / mem.totalMem) * 100);
+return byteCalculation(useMem) + " / " + byteCalculation(mem.totalMem) + "(" + percent + "%)";
+}
