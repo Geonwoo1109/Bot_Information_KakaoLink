@@ -1,0 +1,19 @@
+const kalingModule = require('kaling').Kakao();
+const Kakao = new kalingModule();
+Kakao.init('3ec83a6de844b575e244d3b3b5af0ad0'); //자스키
+Kakao.login('ckrgksqns333@gmail.com','wlsWkckrgksqns123'); //아디•비번
+var charging = {"unknown":"Not Charging", "ac":"Charging"};
+
+function response(room, msg, sender, isGroupChat, replier, ImageDB, packageName, threadId) {
+
+if (msg == ".봇상태") {
+Kakao.send(room, {"link_ver" : "4.0",
+                  "template_id" : 45756,
+                  "template_args" : {
+                    i1: Device.getBatteryLevel()+"%",
+                    i2: charging[Device.getPlugType()],
+                    i3: "http://makejoy.co.kr/mjbot/info/bt100.png"
+                  }
+                 }, "custom");
+}
+} 
