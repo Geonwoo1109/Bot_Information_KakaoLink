@@ -1,0 +1,18 @@
+출처: https://cafe.naver.com/nameyee/22160
+
+"\n\n브랜드 : "+Device.getPhoneBrand()+
+"\n버전 : " +Device.getAndroidVersionName()+
+"\n모델:"+Device.getPhoneModel()+
+"\n배터리충전상태:"+Device.getPlugType()+
+"\n배터리 : "  +Device.getBatteryLevel()+
+"%\n배터리온도:"+Device.getBatteryTemperature()/10+
+"°C\n와이파이 속도: "+Api.getContext().getSystemService(Context.WIFI_SERVICE).getConnectionInfo().getLinkSpeed()+
+"\n배터리전압 : "+Device.getBatteryVoltage()+
+"\n충전 : "+((Device.isCharging()) ? 'ChargeO':'ChargeX')+
+"\n"+"기기에는 " + java.lang.Runtime.getRuntime().availableProcessors() + " 개의 코어가 장착되어있습니다."+
+"\n메모리 여유 가용량 : " +java.lang.Runtime.getRuntime().freeMemory() + " (bytes)"+
+"\n메모리 사용량 : " + java.lang.Runtime.getRuntime().totalMemory() +" (bytes)"+
+"\n메모리 전체 용량 : " + java.lang.Runtime.getRuntime().maxMemory() +" (bytes)"+
+"\n디바이스 최대 저장 공간 : " + java.io.File.listRoots()[0].getTotalSpace()+ " (bytes)"+
+"\n디바이스 여유 저장 공간 : " + java.io.File.listRoots()[0].getUsableSpace() +  " (bytes)"+
+"\n와이파이정보:"+Api.getContext().getSystemService(android.content.Context.WIFI_SERVICE).getConnectionInfo()+ "\n"+java.lang.Class.forName("com.android.internal.os.PowerProfile").getConstructor(android.content.Context).newInstance(Api.getContext())+"\n"+java.lang.Class.forName("com.android.internal.os.PowerProfile").getMethod("getBatteryCapacity").invoke(java.lang.Class.forName("com.android.internal.os.PowerProfile").getConstructor(android.content.Context).newInstance(Api.getContext())).toFixed(4).replace(/(0+$)/, "").replace("\.", ""));
