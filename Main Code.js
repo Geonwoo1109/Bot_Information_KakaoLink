@@ -2,9 +2,10 @@
 
 const kalingModule = require('kaling').Kakao();
 const Kakao = new kalingModule();
-Kakao.init(''); //카카오링크 자스키
+Kakao.init(''); //자스키
 Kakao.login('',''); //아디•비번
 var charging = {"unknown":"Not Charging", "ac":"Charging"};
+const Jsoup = org.jsoup.Jsoup;
 
 var per = "";
 
@@ -13,15 +14,15 @@ function response(room, msg, sender, isGroupChat, replier, ImageDB, packageName,
 if (msg == ".봇상태") {
   
   if (Device.getBatteryLevel() > 84) {
-    per = "http://makejoy.co.kr/mjbot/info/bt100.png";
+    per = "https://i.ibb.co/1R3fpj1/bt100.png";
   }  else if (Device.getBatteryLevel() > 59) {
-    per = "http://makejoy.co.kr/mjbot/info/bt85.png";
+    per = "https://i.ibb.co/CVJzyKK/bt85.png";
   } else if (Device.getBatteryLevel() > 29) {
-    per = "http://makejoy.co.kr/mjbot/info/bt60.png";
+    per = "https://i.ibb.co/Jd2GxRR/bt60.png";
   } else if (Device.getBatteryLevel() > 14) {
-    per = "http://makejoy.co.kr/mjbot/info/bt30.png";
+    per = "https://i.ibb.co/brM3Ngc/bt30.png";
   } else if (Device.getBatteryLevel() > 0) {
-    per = "http://makejoy.co.kr/mjbot/info/bt15.png";
+    per = "https://i.ibb.co/Ybv8rCs/bt15.png";
   }
 
   try{
